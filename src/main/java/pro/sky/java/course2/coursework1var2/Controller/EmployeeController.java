@@ -1,38 +1,41 @@
 package pro.sky.java.course2.coursework1var2.Controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.java.course2.coursework1var2.Employee;
 import pro.sky.java.course2.coursework1var2.Service.EmployeeService;
 
-@RestController
-public class EmployeeController {
-    private final EmployeeService employeeService;
-    private Employee employee;
+import java.util.Collection;
 
-    public EmployeeController(EmployeeService employeeService) {
-        this.employeeService = employeeService;
+@RestController
+@RequestMapping("/employee")
+public class EmployeeController {
+    private EmployeeService service;
+
+    public EmployeeController(EmployeeService service) {
+        this.service = service;
+    }
+
+    @GetMapping("/add")
+    public Employee addEmployee(@RequestParam String firstName,
+                                @RequestParam String lastName) {
+        return service.addEmployee(firstName, lastName);
+    }  @GetMapping("/remove")
+    public Employee removeEmployee(@RequestParam String firstName,
+                                    @RequestParam String lastName) {
+        return service.removeEmployee(firstName, lastName);
+    }  @GetMapping("/find")
+    public Employee findEmployee(@RequestParam String firstName,
+                                @RequestParam String lastName) {
+        return service.findEmployee(firstName, lastName);
     }
 
     @GetMapping
-    public String start() {
-        return "Список сотрудников ";
+    public Collection<Employee> findAll{
+        return EmployeeService.findAll();
 
     }
-    @GetMapping(path = "/employee")
-    public String getEmployeeInfo(@RequestParam("number") Integer number) {
 
-        return employeeService.getEmployee(number);
-    }
-    @GetMapping(path = "/employee/add")
-    public String addEmployee(@RequestParam("firstName") String firstName,
-                              @RequestParam("lastName") String lastName) {
-        Employee employee = new Employee(
-                firstName,
-                lastName);
-        employeeService.addEmployee(employee);
-
-        return "Добавлевленный сотрудник";
-    }
 }

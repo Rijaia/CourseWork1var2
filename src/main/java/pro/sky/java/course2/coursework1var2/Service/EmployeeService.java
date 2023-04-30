@@ -3,14 +3,17 @@ package pro.sky.java.course2.coursework1var2.Service;
 import org.springframework.stereotype.Service;
 import pro.sky.java.course2.coursework1var2.Employee;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface EmployeeService {
 
 
-    void addEmployee(Employee employee);
+    Employee addEmployee(String firstName, String lastName);
 
-    String getEmployee(Integer number);
+    Employee removeEmployee(String firstName, String lastName);
 
-    String getEmployee(Employee employee);
+    Employee findEmployee(String firstName, String lastName);
+
+    Collection<Employee> findAll();
 }
