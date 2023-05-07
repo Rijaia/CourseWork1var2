@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pro.sky.java.course2.coursework1var2.Employee;
 import pro.sky.java.course2.coursework1var2.Service.EmployeeService;
+import pro.sky.java.course2.coursework1var2.exception.EmployeeStorageIsFullExeption;
 
 import java.util.Collection;
 
@@ -20,22 +21,15 @@ public class EmployeeController {
 
     @GetMapping("/add")
     public Employee addEmployee(@RequestParam String firstName,
-                                @RequestParam String lastName) {
+                                @RequestParam String lastName) throws EmployeeStorageIsFullExeption {
         return service.addEmployee(firstName, lastName);
     }  @GetMapping("/remove")
-    public Employee removeEmployee(@RequestParam String firstName,
+    public void removeEmployee(@RequestParam String firstName,
                                     @RequestParam String lastName) {
-        return service.removeEmployee(firstName, lastName);
     }  @GetMapping("/find")
     public Employee findEmployee(@RequestParam String firstName,
                                 @RequestParam String lastName) {
         return service.findEmployee(firstName, lastName);
-    }
-
-    @GetMapping
-    public Collection<Employee> findAll{
-        return EmployeeService.findAll();
-
     }
 
 }
