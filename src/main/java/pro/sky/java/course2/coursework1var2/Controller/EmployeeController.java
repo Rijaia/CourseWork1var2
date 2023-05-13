@@ -20,15 +20,20 @@ public class EmployeeController {
     }
 
     @GetMapping("/add")
-    public Employee addEmployee(@RequestParam String firstName,
-                                @RequestParam String lastName) throws EmployeeStorageIsFullExeption {
-        return service.addEmployee(firstName, lastName);
-    }  @GetMapping("/remove")
-    public void removeEmployee(@RequestParam String firstName,
-                                    @RequestParam String lastName) {
-    }  @GetMapping("/find")
-    public Employee findEmployee(@RequestParam String firstName,
-                                @RequestParam String lastName) {
+    public Employee addEmployee(@RequestParam ("firstName") String firstName,
+                                @RequestParam ("lastName") String lastName,
+                                @RequestParam ("salary") Integer salary,
+                                @RequestParam ("departmentId") Integer departmentId
+                                ) throws EmployeeStorageIsFullExeption {
+        return service.addEmployee(firstName, lastName, salary, departmentId);
+    }
+    @GetMapping("/remove")
+    public void removeEmployee(@RequestParam ("firstName") String firstName,
+                               @RequestParam ("lastName") String lastName) {
+    }
+    @GetMapping("/find")
+    public Employee findEmployee(@RequestParam ("firstName") String firstName,
+                                 @RequestParam ("lastName") String lastName) {
         return service.findEmployee(firstName, lastName);
     }
 

@@ -8,8 +8,7 @@ import java.util.Map;
 
 public interface EmployeeService {
 
-
-    Employee addEmployee(String firstName, String lastName) throws EmployeeStorageIsFullExeption;
+    Employee addEmployee(String firstName, String lastName, int salary, int departmentId) throws EmployeeStorageIsFullExeption;
 
     void removeEmployee(String firstName, String lastName);
 
