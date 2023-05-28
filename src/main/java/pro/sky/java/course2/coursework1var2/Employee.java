@@ -1,5 +1,7 @@
 package pro.sky.java.course2.coursework1var2;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.Objects;
 
 public class Employee {
@@ -10,8 +12,8 @@ public class Employee {
 
 
     public Employee(String firstName, String lastName, Integer salary, Integer departmentId) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+        this.firstName = StringUtils.capitalize(firstName.toLowerCase());
+        this.lastName = StringUtils.capitalize(lastName.toLowerCase());
         this.salary = salary;
         this.departmentId = departmentId;
     }
