@@ -10,15 +10,15 @@ import pro.sky.java.course2.coursework1var2.Service.EmployeeService;
 import pro.sky.java.course2.coursework1var2.exception.EmployeeStorageIsFullExeption;
 import pro.sky.java.course2.coursework1var2.validate.EmployeeValidator;
 
-import java.util.Collection;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
-    private EmployeeService service;
+    private final EmployeeService employeeService;
 
-    public EmployeeController(EmployeeService service) {
-        this.service = service;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/add")
@@ -29,7 +29,7 @@ public class EmployeeController {
             @RequestParam ("departmentId") Integer departmentId
     ) throws EmployeeStorageIsFullExeption {
         if (EmployeeValidator.validate(firstName, lastName)) {
-            return ResponseEntity.ok(service.addEmployee(firstName, lastName, salary, departmentId));
+            return ResponseEntity.ok(employeeService.addEmployee(firstName, lastName, salary, departmentId));
         } else {
             return ResponseEntity.badRequest().build();
         }
@@ -42,7 +42,14 @@ public class EmployeeController {
     @GetMapping("/find")
     public Employee findEmployee(@RequestParam ("firstName") String firstName,
                                  @RequestParam ("lastName") String lastName) {
-        return service.findEmployee(firstName, lastName);
+        return employeeService.findEmployee(firstName, lastName);
+    }
+
+    @GetMapping("/all")
+    public Map<String, Employee> findAllEmployee(
+            @RequestParam("departmentId") Integer departmentId
+    ){
+        return employeeService.getAllEmployees();
     }
 
 }
