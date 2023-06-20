@@ -1,5 +1,6 @@
 package pro.sky.java.course2.coursework1var2.Service.Impl;
 
+import org.springframework.stereotype.Service;
 import pro.sky.java.course2.coursework1var2.Employee;
 import pro.sky.java.course2.coursework1var2.Service.DepartmentService;
 import pro.sky.java.course2.coursework1var2.Service.EmployeeService;
@@ -8,7 +9,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-
+@Service
 public class DepartmentServiceImpl implements DepartmentService {
 
     private final EmployeeService employeeService;
@@ -16,6 +17,7 @@ public class DepartmentServiceImpl implements DepartmentService {
     public DepartmentServiceImpl(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
+
 
     @Override
     public Employee getEmployeeWithMaxSalary(Integer departmentId) {
