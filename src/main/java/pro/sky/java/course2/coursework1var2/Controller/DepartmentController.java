@@ -28,9 +28,15 @@ public class DepartmentController {
     @GetMapping("/min-salary")
     public Employee getEmployeeWithMinSalary(@RequestParam("departmentId") Integer departmentId) {
         return departmentService.getEmployeeWithMinSalary(departmentId);
-    }  @GetMapping("/all")
+    }
+    @GetMapping("/all")
     public Map<Integer, List<Employee>> getGropedByDepartmentEmployees(
             @RequestParam(name = "departmentId", required = false) Integer departmentId) {
         return departmentService.getGropedByDepartmentEmployees(departmentId);
+    }
+    @GetMapping("/salary-by-department")
+    public double sumSalaryByDepartment(
+            @RequestParam(name = "departmentId",required = false) Integer departmentId) {
+        return departmentService.getSumSalaryByDepartment(departmentId);
     }
 }

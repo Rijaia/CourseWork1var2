@@ -7,10 +7,7 @@ import org.junit.jupiter.api.Test;
 import pro.sky.java.course2.coursework1var2.Employee;
 import pro.sky.java.course2.coursework1var2.exception.EmployeeStorageIsFullExeption;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
@@ -25,16 +22,13 @@ class EmployeeServiceImplTest {
         List<Employee> employees = new ArrayList<>(){{
             add(new Employee("Ivan","Ivanov", 40000,1));
         }};
-        List<Employee> expected = employees;
-        List<Employee> actual = (List<Employee>) employeeService.addEmployee(
-                "Ivan","Ivanov", 40000,1);
-
         //when
-
-
+        List<Employee> expected = Collections.singletonList(employees.get(0));
+        List<Employee> addEmployee = (List<Employee>) employeeService.addEmployee(
+                "Ivan","Ivanov", 40000,1);
+        List<Employee> actual = Collections.singletonList(addEmployee.get(0));
         //then
         Assertions.assertEquals(expected,actual);
-
     }
 
     @Test

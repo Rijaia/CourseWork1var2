@@ -17,7 +17,7 @@ import java.util.Map;
 
 import static org.assertj.core.api.BDDAssumptions.given;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class DepartmentServiceImplTest {
@@ -73,6 +73,8 @@ class DepartmentServiceImplTest {
 
         //then
         Assertions.assertNull(employeeWithMaxSalary);
+        verify(employeeService, times(1)).getAllEmployees();
+
     }
 
     @Test
@@ -91,6 +93,8 @@ class DepartmentServiceImplTest {
 
         //then
         Assertions.assertEquals(employees.get(1), employeeWithMinSalary);
+        verify(employeeService, times(1)).getAllEmployees();
+
     }
 
 
@@ -100,17 +104,11 @@ class DepartmentServiceImplTest {
         final int departmentId = 1;
         final Map<String, Employee> employeeMap = new HashMap<>();
         for (Employee employee : employees) {
-            employeeMap.put(employee.getFirstName()+employee.getLastName(), employee);
-        };
-
+            employeeMap.put(employee.getFirstName()+employee.getLastName(), employee);};
         when(employeeService.getAllEmployees()).thenReturn(employeeMap);
-
-
         //when
         Map<Integer, List<Employee>> gropedByDepartmentEmployees =
                 departmentService.getGropedByDepartmentEmployees(departmentId);
-
         //then
-        Assertions.assertEquals(employeeMap, gropedByDepartmentEmployees);
-    }
+        Assertions.assertEquals(employeeMap, gropedByDepartmentEmployees);}
 }
