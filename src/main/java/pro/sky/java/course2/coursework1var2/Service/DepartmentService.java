@@ -2,7 +2,6 @@ package pro.sky.java.course2.coursework1var2.Service;
 
 import pro.sky.java.course2.coursework1var2.Employee;
 
-import java.util.List;
 import java.util.Map;
 
 public interface DepartmentService {
@@ -14,5 +13,5 @@ public interface DepartmentService {
 
     Double getSumSalaryByDepartment(Integer departmentId);
 
-    Map<Integer, List<Employee>> getGropedByDepartmentEmployees(Integer departmentId);
+    Map<String, Employee> getGropedByDepartmentEmployees(Integer departmentId);
 }

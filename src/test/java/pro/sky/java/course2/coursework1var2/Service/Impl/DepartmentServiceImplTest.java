@@ -104,10 +104,10 @@ class DepartmentServiceImplTest {
         final int departmentId = 1;
         final Map<String, Employee> employeeMap = new HashMap<>();
         for (Employee employee : employees) {
-            employeeMap.put(employee.getFirstName()+employee.getLastName(), employee);};
+            employeeMap.put(employee.getFirstName()+employee.getLastName(), employee);}
         when(employeeService.getAllEmployees()).thenReturn(employeeMap);
         //when
-        Map<Integer, List<Employee>> gropedByDepartmentEmployees =
+        Map<String, Employee> gropedByDepartmentEmployees =
                 departmentService.getGropedByDepartmentEmployees(departmentId);
         //then
         Assertions.assertEquals(employeeMap, gropedByDepartmentEmployees);}

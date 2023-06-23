@@ -4,6 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import pro.sky.java.course2.coursework1var2.Employee;
 import pro.sky.java.course2.coursework1var2.exception.EmployeeStorageIsFullExeption;
 
@@ -13,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
 class EmployeeServiceImplTest {
+
     private EmployeeServiceImpl employeeService;
 
 
@@ -26,7 +28,7 @@ class EmployeeServiceImplTest {
         List<Employee> expected = Collections.singletonList(employees.get(0));
         List<Employee> addEmployee = (List<Employee>) employeeService.addEmployee(
                 "Ivan","Ivanov", 40000,1);
-        List<Employee> actual = Collections.singletonList(addEmployee.get(0));
+        List<Employee> actual = (List<Employee>) employeeService.getAllEmployees().values();
         //then
         Assertions.assertEquals(expected,actual);
     }

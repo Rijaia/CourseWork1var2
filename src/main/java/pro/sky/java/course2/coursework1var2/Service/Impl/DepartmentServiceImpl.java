@@ -5,9 +5,7 @@ import pro.sky.java.course2.coursework1var2.Employee;
 import pro.sky.java.course2.coursework1var2.Service.DepartmentService;
 import pro.sky.java.course2.coursework1var2.Service.EmployeeService;
 
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,10 +46,15 @@ public class DepartmentServiceImpl implements DepartmentService {
     }
 
     @Override
-    public Map<Integer, List<Employee>> getGropedByDepartmentEmployees(Integer departmentId) {
-        return employeeService.getAllEmployees().values().stream().
-                filter(employee -> departmentId == null || employee.getDepartmentId().equals(departmentId))
-                .collect(Collectors.groupingBy(Employee::getDepartmentId));
+    public Map<String, Employee> getGropedByDepartmentEmployees(Integer departmentId) {
+        Map<String, Employee> map = new HashMap<>();
+        for (Employee employee : employeeService.getAllEmployees().values()) {
+            if (departmentId == null || employee.getDepartmentId().equals(departmentId)) {
+                map.computeIfAbsent(employee.getFirstName()+employee.getLastName(),
+                        k -> employee);
+            }
+        }
+        return map;
 
     }
 }

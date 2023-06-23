@@ -30,7 +30,7 @@ public class DepartmentController {
         return departmentService.getEmployeeWithMinSalary(departmentId);
     }
     @GetMapping("/all")
-    public Map<Integer, List<Employee>> getGropedByDepartmentEmployees(
+    public Map<String, Employee> getGropedByDepartmentEmployees(
             @RequestParam(name = "departmentId", required = false) Integer departmentId) {
         return departmentService.getGropedByDepartmentEmployees(departmentId);
     }
